@@ -23,25 +23,26 @@
         }
         #app {
             width: 100%; max-width: 480px; min-height: 100vh; position: relative;
-            padding: 40px 24px; display: flex; flex-direction: column; align-items: center;
+            padding: 24px 16px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
 
         /* Telas */
         .screen {
             width: 100%; display: flex; flex-direction: column; align-items: center;
-            opacity: 0; pointer-events: none; position: absolute; top: 40px; transition: opacity 0.6s ease;
+            opacity: 0; pointer-events: none; position: absolute; top: 20px; transition: opacity 0.6s ease;
         }
         .screen.active { opacity: 1; pointer-events: auto; position: relative; top: 0; }
         .hidden { display: none !important; }
 
         /* Tipografia */
-        h1.title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 8px; text-align: center; }
-        p.subtitle { font-size: 0.95rem; color: #555; margin-bottom: 32px; text-align: center; font-weight: 300; }
+        /* Tipografia */
+        img.title-img { max-width: 75%; height: auto; margin: 0 auto 12px auto; display: block; object-fit: contain; }
+        p.subtitle { font-size: 0.9rem; color: #555; margin-bottom: 24px; text-align: center; font-weight: 300; }
 
         /* Grid da Memória */
         .grid {
             display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr);
-            gap: 12px; width: 100%; aspect-ratio: 3/4; perspective: 1000px;
+            gap: 8px; width: 100%; aspect-ratio: 3/4; perspective: 1000px;
         }
 
         /* Cartas */
@@ -55,33 +56,33 @@
             border-radius: 12px; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); overflow: hidden;
         }
-        .card-back { background-color: #ae2012; }
+        .card-back { background-color: #1a1a1a; }
         .card-back svg { width: 28px; height: 28px; fill: #fcfcfc; }
         .card-front { background-color: #ffffff; transform: rotateY(180deg); border: 1px solid #eee; }
         .card-front img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-        .card-text { font-weight: 800; font-size: 1.1rem; color: #ae2012; text-align: center; line-height: 1.15; }
+        .card-text { font-weight: 800; font-size: 1.1rem; color: #1a1a1a; text-align: center; line-height: 1.15; }
 
         /* Botão */
         .btn-primary {
-            background-color: #ae2012; color: #fff; border: none; padding: 0 32px; min-height: 56px;
-            width: 100%; font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 600;
-            border-radius: 28px; cursor: pointer; box-shadow: 0 8px 24px rgba(174, 32, 18, 0.25);
-            margin-top: 40px; display: none; align-items: center; justify-content: center;
+            background-color: #1a1a1a; color: #fff; border: none; padding: 0 24px; min-height: 50px;
+            width: 100%; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600;
+            border-radius: 25px; cursor: pointer; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            margin-top: 24px; display: none; align-items: center; justify-content: center;
         }
         .btn-primary.show { display: flex; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 
         /* Tela 2: Raspadinha */
-        .instruction { font-size: 0.95rem; color: #555; margin-bottom: 24px; text-align: center; animation: pulse 2.5s infinite; }
+        .instruction { font-size: 0.9rem; color: #555; margin-bottom: 20px; text-align: center; animation: pulse 2.5s infinite; }
         .scratch-wrapper {
-            position: relative; width: 100%; background: #ffffff; border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.06); overflow: hidden; margin-bottom: 40px;
+            position: relative; width: 100%; background: #ffffff; border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06); overflow: hidden; margin-bottom: 24px;
         }
         .letter-content {
-            padding: 40px 30px; font-size: 1rem; line-height: 1.8; color: #2c2c2c; user-select: text;
+            padding: 24px 20px; font-size: 0.95rem; line-height: 1.6; color: #2c2c2c; user-select: text;
         }
-        .letter-content p { margin-bottom: 24px; }
+        .letter-content p { margin-bottom: 20px; }
         .letter-content p:last-child { margin-bottom: 0; }
-        .letter-content .highlight { font-weight: 800; color: #ae2012; font-size: 1.1em; }
+        .letter-content .highlight { font-weight: 800; color: #1a1a1a; font-size: 1.1em; }
         
         #scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: grab; }
         #scratch-canvas:active { cursor: grabbing; }
@@ -95,7 +96,7 @@
     <div id="app">
         <!-- FASE 1: JOGO DA MEMÓRIA -->
         <div id="game-screen" class="screen active">
-            <h1 class="title">Happy Birthday, Mariana!</h1>
+            <img src="hp.png" alt="Happy Birthday" class="title-img" onerror="this.src='images/hp.png'">
             <p class="subtitle">Find the pairs to open your gift.</p>
             <div class="grid" id="memory-grid"></div>
             <button id="gift-btn" class="btn-primary">Open my gift</button>
@@ -103,7 +104,7 @@
 
         <!-- FASE 2: RASPADINHA -->
         <div id="scratch-screen" class="screen hidden">
-            <h1 class="title">Happy Birthday</h1>
+            <img src="hp.png" alt="Happy Birthday" class="title-img" onerror="this.src='images/hp.png'">
             <p class="instruction"> Scratch to reveal your message </p>
             
             <div class="scratch-wrapper">
@@ -216,7 +217,7 @@
         function winGame() {
             confetti({
                 particleCount: 150, spread: 70, origin: { y: 0.6 },
-                colors: ['#ae2012', '#1a1a1a', '#ffffff']
+                colors: ['#000000', '#333333', '#ffffff']
             });
             giftBtn.classList.add('show');
         }
@@ -245,8 +246,8 @@
             canvas.height = wrapper.offsetHeight;
 
             const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#ae2012');
-            gradient.addColorStop(1, '#6a1109');
+            gradient.addColorStop(0, '#2a2a2a');
+            gradient.addColorStop(1, '#0a0a0a');
             
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -361,7 +362,7 @@
                     canvas.style.transition = 'opacity 1s ease';
                     canvas.style.opacity = '0';
                     setTimeout(() => { canvas.style.display = 'none'; }, 1000);
-                    confetti({ particleCount: 100, spread: 60, colors: ['#ae2012']});
+                    confetti({ particleCount: 100, spread: 60, colors: ['#1a1a1a']});
                 }
             }
         }
